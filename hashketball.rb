@@ -1,4 +1,4 @@
-# Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -126,4 +126,59 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player_name) 
+  player_hash = game_hash[:home][:players].find{ |test_player| test_player[:player_name] == player_name }
+  if player_hash == nil
+     player_hash = game_hash[:away][:players].find{ |test_player| test_player[:player_name] == player_name }
+  end
+  player_hash[:points]
+end
+
+def shoe_size(player_name) 
+  player_hash = game_hash[:home][:players].find{ |test_player| test_player[:player_name] == player_name }
+  if player_hash == nil
+     player_hash = game_hash[:away][:players].find{ |test_player| test_player[:player_name] == player_name }
+  end
+  player_hash[:shoe]
+end
+
+def team_colors(team_names)
+  if game_hash[:home][:team_name] == team_names
+    return game_hash[:home][:colors] 
+  elsif game_hash[:away][:team_name] == team_names
+    return game_hash[:away][:colors]
+  end
+end
+
+def team_names
+  team_names = [game_hash[:home][:team_name], game_hash[:away][:team_name]]
+  return team_names
+end
+
+def player_numbers(in_team_name)
+  numbers_array = []
+  if game_hash[:home][:team_name] == in_team_name
+    game_hash[:home][:players].each { |value| numbers_array << value[:number] } 
+  elsif game_hash[:away][:team_name] == in_team_name
+    game_hash[:away][:players].each { |value| numbers_array << value[:number] } 
+  end
+  return numbers_array
+end
+
+def player_stats(in_player_name)
+  player_hash = game_hash[:home][:players].find{ |test_player| test_player[:player_name] == in_player_name }
+  if player_hash == nil
+     player_hash = game_hash[:away][:players].find{ |test_player| test_player[:player_name] == in_player_name }
+  end
+  player_hash
+end
+
+def big_shoe_rebounds
+  return (game_hash[:home][:players])[3][:rebounds]
+end
+  
+  
+  
+  
+  
+  
